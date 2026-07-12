@@ -3,54 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cibin Anoop | Interactive Professional CV</title>
+    <title>Cibin Anoop | Professional Portfolio</title>
+    <!-- FontAwesome for Professional Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Dark Theme Variables */
-            --bg-color-1: #0f172a;
-            --bg-color-2: #1e1b4b;
-            --bg-color-3: #0f2e2e;
-            --text-main: #f8fafc;
-            --text-muted: #cbd5e1;
-            --accent: #3b82f6;
-            --accent-gradient: linear-gradient(135deg, #3b82f6, #a855f7);
-            --card-bg: rgba(30, 41, 59, 0.4);
-            --card-border: rgba(255, 255, 255, 0.08);
+            /* Deep Space Dark Theme (Default) */
+            --bg-color-1: #070B19;
+            --bg-color-2: #0F172A;
+            --bg-color-3: #1E1B4B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --accent: #3B82F6;
+            --accent-gradient: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --card-border: rgba(255, 255, 255, 0.1);
             --badge-bg: rgba(59, 130, 246, 0.15);
-            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --nav-bg: rgba(7, 11, 25, 0.85);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
         [data-theme="light"] {
-            /* Light Theme Variables */
-            --bg-color-1: #f1f5f9;
-            --bg-color-2: #e0e7ff;
-            --bg-color-3: #ccfbf1;
-            --text-main: #0f172a;
+            /* Crisp Light Theme */
+            --bg-color-1: #F8FAFC;
+            --bg-color-2: #E2E8F0;
+            --bg-color-3: #F1F5F9;
+            --text-main: #0F172A;
             --text-muted: #475569;
-            --accent: #2563eb;
-            --accent-gradient: linear-gradient(135deg, #2563eb, #9333ea);
-            --card-bg: rgba(255, 255, 255, 0.5);
+            --accent: #2563EB;
+            --accent-gradient: linear-gradient(135deg, #2563EB, #7C3AED, #DB2777);
+            --card-bg: rgba(255, 255, 255, 0.7);
             --card-border: rgba(255, 255, 255, 0.6);
-            --badge-bg: rgba(37, 99, 235, 0.1);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            --badge-bg: rgba(37, 99, 235, 0.15);
+            --nav-bg: rgba(248, 250, 252, 0.85);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color-1); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 5px; }
+
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-            /* Animated Background */
+            line-height: 1.7;
             background: linear-gradient(-45deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3));
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
+            overflow-x: hidden;
             transition: background 0.5s ease;
         }
 
@@ -60,139 +69,219 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Container & Layout */
         .container {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 0 1.5rem;
         }
 
-        /* Glassmorphism Header */
-        header {
+        section {
+            padding: 6rem 0;
+        }
+
+        /* Sticky Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 2rem;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            letter-spacing: 1px;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-decoration: none;
         }
 
-        .theme-toggle {
-            background: var(--accent-gradient);
-            border: none;
-            color: white;
-            padding: 0.6rem 1.4rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-        }
-
-        /* Hero Section with Image */
-        .hero {
+        .nav-links {
             display: flex;
-            flex-direction: column-reverse;
-            align-items: center;
             gap: 2rem;
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease-in-out;
-            text-align: center;
+            align-items: center;
         }
 
-        @media (min-width: 768px) {
-            .hero {
-                flex-direction: row;
-                text-align: left;
-                justify-content: space-between;
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s;
+        }
+        
+        .icon-btn:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                border-bottom: 1px solid var(--card-border);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: block;
             }
         }
 
-        .hero-content {
-            flex: 1;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
         }
 
-        .profile-img-container {
+        .hero-content {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 3rem;
+            width: 100%;
+        }
+
+        @media (min-width: 900px) {
+            .hero-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .hero-text {
+                flex: 1;
+                padding-right: 2rem;
+            }
+        }
+
+        .profile-wrapper {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 280px;
+            height: 280px;
         }
 
         .profile-img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             object-fit: cover;
             border: 4px solid transparent;
             background-image: linear-gradient(var(--bg-color-1), var(--bg-color-1)), var(--accent-gradient);
             background-origin: border-box;
             background-clip: content-box, border-box;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+            animation: morph 8s ease-in-out infinite;
         }
 
-        .profile-img:hover {
-            transform: scale(1.05) rotate(2deg);
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         }
 
         h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
         }
 
-        .subtitle {
-            font-size: 1.25rem;
+        .typing-container {
+            font-size: 1.5rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            height: 2.5rem;
             font-weight: 600;
         }
 
-        .summary {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 600px;
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
 
-        /* Grid Layout */
-        .cv-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
 
-        @media (min-width: 902px) {
-            .cv-grid {
-                grid-template-columns: 1fr 2fr;
-            }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
         }
 
-        /* Glassmorphism Cards */
-        .card {
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--accent);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Glass Cards */
+        .glass-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -200,924 +289,540 @@
             border-radius: 20px;
             padding: 2.5rem;
             box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.4);
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent-gradient);
-        }
-
-        h2 {
-            font-size: 1.6rem;
-            margin-bottom: 1.8rem;
-            color: var(--text-main);
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 0.5rem;
-        }
-
-        /* Interactive Skills Section */
-        .skill-item {
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
-
-        .skill-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            background-color: rgba(156, 163, 175, 0.2);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: var(--accent-gradient);
-            height: 100%;
-            width: 0;
-            border-radius: 4px;
-            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-        }
-
-        /* Filter Tabs */
-        .filter-buttons {
-            display: flex;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--accent);
-            color: var(--text-main);
-            padding: 0.6rem 1.2rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--accent-gradient);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Interactive Timeline */
-        .timeline-item {
-            border-left: 2px solid var(--accent);
-            padding-left: 1.8rem;
-            position: relative;
-            margin-bottom: 2.5rem;
-            animation: slideIn 0.5s ease-out forwards;
-            transition: transform 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(5px);
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: -7px;
-            top: 6px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--bg-color-1);
-            border: 2px solid var(--accent);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .timeline-item:hover::after {
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        .time-tag {
-            font-size: 0.85rem;
-            background: var(--badge-bg);
-            color: var(--accent);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 0.5rem;
-        }
-
-        .company-tag {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin: 0.25rem 0 0.75rem 0;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        ul li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.6rem;
-            color: var(--text-muted);
-            transition: color 0.3s ease;
-        }
-
-        ul li:hover {
-            color: var(--text-main);
-        }
-
-        ul li::before {
-            content: "▹";
-            color: var(--accent);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 1.1rem;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-box {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 1.2rem 1rem;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--card-border);
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .stat-box:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .stat-num {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.3rem;
-            font-weight: 500;
-        }
-
-        /* Links */
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-main);
-            text-decoration: none;
-            margin-bottom: 1rem;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.3s ease;
-            padding: 0.5rem;
-            border-radius: 8px;
-        }
-
-        .contact-link:hover {
-            color: var(--accent);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <header>
-        <div class="logo">CV</div>
-        <button class="theme-toggle" onclick="toggleTheme()">Toggle Vision</button>
-    </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Cibin Anoop</h1>
-            <p class="subtitle">Web Developer | Python & AI Integration Expert</p>
-            <p class="summary">
-                Detail-oriented professional specializing in computer applications and digital tools. Proven track record in achieving targets with 200+ products sold and 800+ inquiries generated during dynamic promotional campaigns.
-            </p>
-        </div>
-        <div class="profile-img-container">
-            <!-- REPLACE THE SRC BELOW WITH YOUR IMAGE LINK OR FILE NAME -->
-            <img src="YOUR_IMAGE_URL_HERE.jpg" alt="Cibin Anoop" class="profile-img">
-        </div>
-    </section>
-
-    <div class="cv-grid">
-        <!-- LEFT COLUMN -->
-        <div class="left-col">
-            <div class="card">
-                <h2>Contact Area</h2>
-                <a href="mailto:cibinanoop242004@gmail.com" class="contact-link">📧 cibinanoop242004@gmail.com</a>
-                <a href="tel:+919746868705" class="contact-link">📞 +91 9746868705</a>
-                <a href="https://linkedin.com/in/cibin-anoop-36367a365" target="_blank" class="contact-link">🔗 LinkedIn Profile</a>
-                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border);">
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;">📍 Kottayam, Kerala, India</p>
-                    <p style="font-size: 0.95rem; color: var(--text-muted);">🌐 EN • ML • HI</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Tech Matrix</h2>
-                
-                <div class="skill-item" onclick="animateBar(this, '95%')">
-                    <div class="skill-name"><span>MS Office Suite</span><span>95%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
-                </div>
-
-                <div class="skill-item" onclick="animateBar(this, '85%')">
-                    <div class="skill-name"><span>Web Dev (HTML/CSS)</span><span>85%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
-                </div>
-
-                <div class="skill-item" onclick="animateBar(this, '80%')">
-                    <div class="skill-name"><span>Python Automation</span><span>80%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
-                </div>
-
-                <div class="skill-item" onclick="animateBar(this, '85%')">
-                    <div class="skill-name"><span>Adobe Creative</span><span>85%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
-                </div>
-
-                <div class="skill-item" onclick="animateBar(this, '90%')">
-                    <div class="skill-name"><span>AI Integration</span><span>90%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
-                </div>
-                <p style="color: var(--accent); font-size: 0.8rem; margin-top:1rem; text-align: center;">Click any bar to trigger animation</p>
-            </div>
-
-            <div class="card">
-                <h2>Impact Scale</h2>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-num">800+</div>
-                        <div class="stat-label">Inquiries</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-num">200+</div>
-                        <div class="stat-label">Sales</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-num">300+</div>
-                        <div class="stat-label">Team Size</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-num">100%</div>
-                        <div class="stat-label">Satisfaction</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="right-col">
-            <div class="card">
-                <h2>Career Timeline</h2>
-                
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="filterTimeline('all', this)">All History</button>
-                    <button class="filter-btn" onclick="filterTimeline('exp', this)">Experience</button>
-                    <button class="filter-btn" onclick="filterTimeline('proj', this)">Projects & Leadership</button>
-                    <button class="filter-btn" onclick="filterTimeline('edu', this)">Education</button>
-                </div>
-
-                <div id="timeline">
-                    <!-- Experience -->
-                    <div class="timeline-item" data-cat="exp">
-                        <span class="time-tag">April 2024</span>
-                        <h3 style="margin-top: 0.5rem;">Sales Promotion Executive</h3>
-                        <p class="company-tag">TMK System — Kottayam, Kerala</p>
-                        <ul>
-                            <li>Generated 800+ qualified inquiries through targeted engagement.</li>
-                            <li>Achieved 200+ product sales within a 12-day sprint.</li>
-                            <li>Executed flawless after-sales support ensuring high brand retention.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Leadership -->
-                    <div class="timeline-item" data-cat="proj">
-                        <span class="time-tag">Leadership Role</span>
-                        <h3 style="margin-top: 0.5rem;">NSS Secretary</h3>
-                        <p class="company-tag">National Service Scheme</p>
-                        <ul>
-                            <li>Spearheaded operations for a 300+ member volunteer network.</li>
-                            <li>Orchestrated community outreach driving civic responsibility.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Project -->
-                    <div class="timeline-item" data-cat="proj">
-                        <span class="time-tag">Academic Initiative</span>
-                        <h3 style="margin-top: 0.5rem;">Stock Market Awareness Program</h3>
-                        <p class="company-tag">Financial Literacy</p>
-                        <ul>
-                            <li>Designed comprehensive curriculum on investment fundamentals.</li>
-                            <li>Created digital presentations to visualize complex market dynamics.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Education -->
-                    <div class="timeline-item" data-cat="edu">
-                        <span class="time-tag">Class of 2025</span>
-                        <h3 style="margin-top: 0.5rem;">Bachelor of Commerce (B.Com)</h3>
-                        <p class="company-tag">Mahatma Gandhi University — Computer Applications</p>
-                        <ul>
-                            <li>Integrated corporate commerce with technical proficiencies (Python, Web Dev).</li>
-                            <li>Mastered accounting software architecture including Tally ERP 9.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Verified Credentials</h2>
-                <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                    <span class="time-tag">Tally ERP 9 (2025)</span>
-                    <span class="time-tag">Microsoft Office Specialist (2024)</span>
-                    <span class="time-tag">Adobe Photoshop (2022)</span>
-                    <span class="time-tag">Adobe Illustrator (2022)</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Glassmorphism Theme Toggle
-    function toggleTheme() {
-        const doc = document.documentElement;
-        if (doc.getAttribute('data-theme') === 'light') {
-            doc.removeAttribute('data-theme');
-        } else {
-            doc.setAttribute('data-theme', 'light');
-        }
-    }
-
-    // Dynamic Skill Bars Loader with Staggered Animation
-    document.addEventListener("DOMContentLoaded", () => {
-        const bars = document.querySelectorAll('.progress-fill');
-        bars.forEach((bar, index) => {
-            setTimeout(() => {
-                bar.style.width = bar.getAttribute('data-width');
-            }, 300 + (index * 150)); // Staggered loading effect
-        });
-    });
-
-    // Re-animate skills on tap/click
-    function animateBar(element, targetWidth) {
-        const bar = element.querySelector('.progress-fill');
-        bar.style.width = '0';
-        setTimeout(() => { bar.style.width = targetWidth; }, 50);
-    }
-
-    // Smooth Filter Navigation
-    function filterTimeline(category, button) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        const items = document.querySelectorAll('.timeline-item');
-        
-        items.forEach(item => {
-            // Add a quick fade out effect
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(10px)';
-            
-            setTimeout(() => {
-                if (category === 'all' || item.getAttribute('data-cat') === category) {
-                    item.style.display = 'block';
-                    // Trigger reflow
-                    void item.offsetWidth;
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                } else {
-                    item.style.display = 'none';
-                }
-            }, 300); // Matches the CSS transition time
-        });
-    }
-</script>
-</body>
-</html>
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .section-title {
+            font-size: 2.5rem;
             margin-bottom: 3rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .theme-toggle {
-            background: var(--accent-gradient);
-            border: none;
-            color: white;
-            padding: 0.6rem 1.4rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        h1 {
-            font-size: 3.5rem;
+            text-align: center;
             font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
         }
 
-        .subtitle {
-            font-size: 1.35rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .summary {
-            max-width: 800px;
-            font-size: 1.05rem;
-            color: var(--text-muted);
-        }
-
-        /* Responsive Grid Layout */
-        .cv-grid {
+        /* Grid Layouts */
+        .grid-2 {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 2rem;
+        }
+        @media (min-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
         }
 
-        @media (min-width: 902px) {
-            .cv-grid {
-                grid-template-columns: 1fr 1.8fr;
-            }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
         }
 
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent-gradient);
-        }
-
-        h2 {
-            font-size: 1.6rem;
-            margin-bottom: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 0.5rem;
-        }
-
-        /* Interactive Skills Section */
-        .skill-item {
+        /* Skills Progress */
+        .skill-group {
             margin-bottom: 1.5rem;
-            cursor: pointer;
         }
-
-        .skill-name {
+        
+        .skill-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
-        .progress-bar {
-            background-color: rgba(156, 163, 175, 0.2);
-            height: 8px;
-            border-radius: 4px;
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
             overflow: hidden;
         }
 
-        .progress-fill {
-            background: var(--accent-gradient);
+        .skill-progress {
             height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 5px;
             width: 0;
-            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        /* Filter Tabs */
-        .filter-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--text-main);
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        /* Interactive Timeline */
-        .timeline-item {
-            border-left: 2px solid var(--accent);
-            padding-left: 1.8rem;
+        /* Timeline / Journey */
+        .timeline {
             position: relative;
-            margin-bottom: 2.5rem;
-            animation: slideIn 0.5s ease-out forwards;
+            padding-left: 2rem;
         }
 
-        .timeline-item::after {
+        .timeline::before {
             content: '';
             position: absolute;
-            left: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent);
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--card-border);
         }
 
-        .time-tag {
-            font-size: 0.8rem;
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent);
+            z-index: 2;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
             background: var(--badge-bg);
             color: var(--accent);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-weight: 600;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .company-tag {
+        .timeline-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item h4 {
             color: var(--text-muted);
-            font-size: 0.95rem;
             font-weight: 500;
-            margin: 0.25rem 0 0.75rem 0;
+            margin-bottom: 1rem;
         }
 
-        ul {
-            list-style-type: none;
+        .timeline-item ul {
+            list-style: none;
         }
 
-        ul li {
+        .timeline-item ul li {
             position: relative;
-            padding-left: 1.2rem;
+            padding-left: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--text-muted);
         }
 
-        ul li::before {
-            content: "•";
-            color: var(--accent);
-            font-weight: bold;
+        .timeline-item ul li::before {
+            content: '\f105';
+            font-family: 'FontAwesome';
             position: absolute;
             left: 0;
+            color: var(--accent);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-box {
-            background: var(--bg-primary);
+        /* Contact Details */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
             padding: 1rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            transition: background 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--badge-bg);
+            color: var(--accent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        .contact-text h4 { margin-bottom: 0.2rem; }
+        .contact-text a { color: var(--text-muted); text-decoration: none; }
+        .contact-text a:hover { color: var(--accent); }
+
+        /* Scroll Animations (Intersection Observer) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Badges */
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cert-badge {
+            padding: 0.6rem 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
             border-radius: 8px;
-            text-align: center;
-            border: 1px solid var(--card-border);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
         }
 
-        .stat-num {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent);
+        .cert-badge:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
         }
 
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .contact-link {
-            display: block;
-            color: var(--text-main);
-            text-decoration: none;
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-        }
-
-        .contact-link:hover {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="logo">⚡ CA.DEVELOPER</div>
-        <button class="theme-toggle" onclick="toggleTheme()">Toggle Mode</button>
-    </header>
+    <!-- Sticky Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">CA.DEV</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
-    <section class="hero">
-        <h1>Cibin Anoop</h1>
-        <p class="subtitle">B.Com Graduate | Web Developer | Python & AI Integration Expert</p>
-        <p class="summary">
-            Motivated and detail-oriented professional specializing in computer applications, digital tools, and leadership. Proven track record in achieving sales targets with 200+ products sold and 800+ inquiries generated during dynamic promotional campaigns.
-        </p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text reveal">
+                <p style="color: var(--accent); font-weight: 700; letter-spacing: 2px; margin-bottom: 1rem;">HELLO, I'M</p>
+                <h1>Cibin <span class="highlight">Anoop</span></h1>
+                <div class="typing-container" id="typewriter"></div>
+                <p style="color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; font-size: 1.1rem;">
+                    A motivated professional merging Commerce, technical application development, and dynamic sales leadership. Dedicated to creating high-impact solutions.
+                </p>
+                <div>
+                    <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Let's Talk</a>
+                    <!-- Replace href with actual PDF link when hosting -->
+                    <a href="Cibin_Anoop_Resume.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-download"></i> Download CV</a>
+                </div>
+            </div>
+            <div class="profile-wrapper reveal">
+                <!-- Replace src with your professional photo URL -->
+                <img src="https://via.placeholder.com/400" alt="Cibin Anoop" class="profile-img">
+            </div>
+        </div>
     </section>
 
-    <div class="cv-grid">
-        <!-- LEFT COLUMN: Contact, Tech Skills, Stats -->
-        <div class="left-col">
-            <div class="card">
-                <h2>Contact & Info</h2>
-                <a href="mailto:cibinanoop242004@gmail.com" class="contact-link">📧 cibinanoop242004@gmail.com</a>
-                <a href="tel:+919746868705" class="contact-link">📞 +91 9746868705</a>
-                <a href="https://linkedin.com/in/cibin-anoop-36367a365" target="_blank" class="contact-link">🔗 LinkedIn Profile</a>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">📍 Kottayam, Kerala, India<br>🌐 Languages: English, Malayalam, Hindi</p>
+    <!-- Stats & About Section -->
+    <section id="about" class="container">
+        <div class="grid-3">
+            <div class="glass-card reveal" style="text-align: center;">
+                <i class="fas fa-chart-line fa-3x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h2 style="font-size: 2.5rem; font-weight: 800;">800+</h2>
+                <p style="color: var(--text-muted); font-weight: 600;">Inquiries Generated</p>
             </div>
+            <div class="glass-card reveal" style="text-align: center; transition-delay: 0.1s;">
+                <i class="fas fa-box-open fa-3x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h2 style="font-size: 2.5rem; font-weight: 800;">200+</h2>
+                <p style="color: var(--text-muted); font-weight: 600;">Products Sold</p>
+            </div>
+            <div class="glass-card reveal" style="text-align: center; transition-delay: 0.2s;">
+                <i class="fas fa-users fa-3x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h2 style="font-size: 2.5rem; font-weight: 800;">300+</h2>
+                <p style="color: var(--text-muted); font-weight: 600;">Members Led</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="card">
-                <h2>Technical Metrics</h2>
+    <!-- Skills Section -->
+    <section id="skills" class="container">
+        <h2 class="section-title reveal">Technical <span class="highlight">Expertise</span></h2>
+        
+        <div class="grid-2">
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">Development & Software</h3>
                 
-                <div class="skill-item" onclick="animateBar(this, '90%')">
-                    <div class="skill-name"><span>Microsoft Office Suite</span><span>95%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+                <div class="skill-group">
+                    <div class="skill-header"><span>Web Development (HTML, CSS, JS)</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+                </div>
+                
+                <div class="skill-group">
+                    <div class="skill-header"><span>Python Automation</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
                 </div>
 
-                <div class="skill-item" onclick="animateBar(this, '85%')">
-                    <div class="skill-name"><span>Web Development (HTML/CSS)</span><span>85%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                <div class="skill-group">
+                    <div class="skill-header"><span>AI Integration</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
                 </div>
-
-                <div class="skill-item" onclick="animateBar(this, '80%')">
-                    <div class="skill-name"><span>Python & Automation</span><span>80%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
-                </div>
-
-                <div class="skill-item" onclick="animateBar(this, '85%')">
-                    <div class="skill-name"><span>Adobe Creative Suite</span><span>85%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
-                </div>
-
-                <div class="skill-item" onclick="animateBar(this, '90%')">
-                    <div class="skill-name"><span>AI Workflow Integration</span><span>90%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
-                </div>
-                <small style="color: var(--text-muted); display:block; margin-top:1rem;">💡 Click any bar to re-animate live.</small>
             </div>
 
-            <div class="card">
-                <h2>Impact Metrics</h2>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-num">800+</div>
-                        <div class="stat-label">Inquiries Generated</div>
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">Business & Design</h3>
+                
+                <div class="skill-group">
+                    <div class="skill-header"><span>Microsoft Office Suite</span><span>95%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+                </div>
+                
+                <div class="skill-group">
+                    <div class="skill-header"><span>Adobe Creative Suite (Ps, Ai)</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-header"><span>Sales & Marketing Strategy</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Leadership -->
+    <section id="experience" class="container">
+        <h2 class="section-title reveal">Professional <span class="highlight">Journey</span></h2>
+        
+        <div class="glass-card reveal">
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <span class="date-badge">April 15, 2024 - April 27, 2024</span>
+                    <h3>Sales Promotion Executive</h3>
+                    <h4>TMK System — Kottayam, Kerala</h4>
+                    <ul>
+                        <li>Promoted company products through strategic customer engagement and targeted marketing initiatives.</li>
+                        <li>Generated 800+ qualified inquiries from potential customers through effective communication and product demonstration.</li>
+                        <li>Achieved sales of 200+ products within a 12-day promotional period, demonstrating strong sales acumen.</li>
+                        <li>Provided comprehensive after-sales support to 10+ customers, maintaining high satisfaction rates.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="date-badge">Leadership Role</span>
+                    <h3>NSS Secretary</h3>
+                    <h4>National Service Scheme</h4>
+                    <ul>
+                        <li>Led and coordinated a massive team of 300+ members in various social service initiatives.</li>
+                        <li>Organized multiple community outreach events, fostering civic engagement and social responsibility.</li>
+                        <li>Developed strong leadership, delegation, and team management skills through rigorous hands-on experience.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="date-badge">Academic Project</span>
+                    <h3>Stock Market Awareness Initiative</h3>
+                    <h4>Financial Literacy Campaign</h4>
+                    <ul>
+                        <li>Conducted comprehensive awareness programs educating commerce students on stock fundamentals.</li>
+                        <li>Developed advanced educational materials to enhance understanding of market dynamics.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section id="education" class="container">
+        <h2 class="section-title reveal">Education & <span class="highlight">Certifications</span></h2>
+        
+        <div class="grid-2">
+            <div class="glass-card reveal">
+                <i class="fas fa-graduation-cap fa-2x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Bachelor of Commerce (B.Com)</h3>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;">Mahatma Gandhi University, Kottayam</h4>
+                <p style="color: var(--text-muted); font-weight: 500;"><i class="far fa-calendar-alt"></i> Graduated: 2025</p>
+                <p style="margin-top: 1rem; color: var(--text-muted);">
+                    Specialization in Computer Applications. Core focus on merging traditional commerce frameworks with modern technical solutions, automation, and digital literacy.
+                </p>
+            </div>
+
+            <div class="glass-card reveal">
+                <i class="fas fa-certificate fa-2x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Verified Credentials</h3>
+                
+                <div class="badges-container">
+                    <div class="cert-badge"><i class="fas fa-check-circle"></i> Tally ERP 9 (2025)</div>
+                    <div class="cert-badge"><i class="fas fa-check-circle"></i> Microsoft Office Specialist (2024)</div>
+                    <div class="cert-badge"><i class="fas fa-check-circle"></i> Adobe Photoshop (2022)</div>
+                    <div class="cert-badge"><i class="fas fa-check-circle"></i> Adobe Illustrator (2022)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+        <h2 class="section-title reveal">Get In <span class="highlight">Touch</span></h2>
+        
+        <div class="glass-card reveal" style="max-width: 800px; margin: 0 auto;">
+            <div class="grid-2">
+                <div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <a href="mailto:cibinanoop242004@gmail.com">cibinanoop242004@gmail.com</a>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-num">200+</div>
-                        <div class="stat-label">Products Sold</div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <a href="tel:+919746868705">+91 9746868705</a>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-num">300+</div>
-                        <div class="stat-label">NSS Members Led</div>
+                </div>
+
+                <div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="contact-text">
+                            <h4>LinkedIn</h4>
+                            <a href="https://linkedin.com/in/cibin-anoop-36367a365" target="_blank">Connect with me</a>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-num">100%</div>
-                        <div class="stat-label">Client Satisfaction</div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <span style="color: var(--text-muted);">Kottayam, Kerala, India</span><br>
+                            <span style="font-size: 0.85rem; color: var(--accent);">Willing to relocate</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- RIGHT COLUMN: Interactive Experience, Projects, Education -->
-        <div class="right-col">
-            <div class="card">
-                <h2>Professional Journey</h2>
-                
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="filterTimeline('all', this)">Show All</button>
-                    <button class="filter-btn" onclick="filterTimeline('exp', this)">Experience</button>
-                    <button class="filter-btn" onclick="filterTimeline('proj', this)">Projects & Leadership</button>
-                    <button class="filter-btn" onclick="filterTimeline('edu', this)">Education</button>
-                </div>
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); border-top: 1px solid var(--card-border); margin-top: 3rem;">
+        <p>&copy; 2024 Cibin Anoop. All rights reserved.</p>
+    </footer>
 
-                <div id="timeline">
-                    <!-- Experience -->
-                    <div class="timeline-item" data-cat="exp">
-                        <span class="time-tag">April 2024</span>
-                        <h3 style="margin-top: 0.5rem;">Sales Promotion Executive</h3>
-                        <p class="company-tag">TMK System — Kottayam, Kerala</p>
-                        <ul>
-                            <li>Generated 800+ qualified inquiries through strategic customer engagement.</li>
-                            <li>Achieved sales of 200+ products within a lightning fast 12-day promotional period.</li>
-                            <li>Provided meticulous after-sales support to secure perfect client feedback loops.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Leadership -->
-                    <div class="timeline-item" data-cat="proj">
-                        <span class="time-tag">Leadership Position</span>
-                        <h3 style="margin-top: 0.5rem;">NSS Secretary</h3>
-                        <p class="company-tag">National Service Scheme</p>
-                        <ul>
-                            <li>Coordinated a massive network of 300+ members in critical social service initiatives.</li>
-                            <li>Organized large-scale outreach events focusing on civic duties and financial literacy.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Project -->
-                    <div class="timeline-item" data-cat="proj">
-                        <span class="time-tag">Academic Project</span>
-                        <h3 style="margin-top: 0.5rem;">Stock Market Awareness Initiative</h3>
-                        <p class="company-tag">Financial Literacy Campaign</p>
-                        <ul>
-                            <li>Educated fellow commerce tracks regarding investment strategies and stock fundamentals.</li>
-                            <li>Designed advanced graphic educational material detailing asset dynamic charts.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Education -->
-                    <div class="timeline-item" data-cat="edu">
-                        <span class="time-tag">Graduated 2025</span>
-                        <h3 style="margin-top: 0.5rem;">Bachelor of Commerce (B.Com)</h3>
-                        <p class="company-tag">Mahatma Gandhi University — Specialization in Computer Applications</p>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Core studies combined corporate accounting with modern software architecture frameworks including Python, Tally ERP 9, and responsive frontends.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Verified Certifications</h2>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Tally ERP 9 (2025)</span>
-                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Microsoft Office Specialist (2024)</span>
-                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Adobe Photoshop (2022)</span>
-                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Adobe Illustrator (2022)</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Theme Toggle Script
-    function toggleTheme() {
-        const doc = document.documentElement;
-        if (doc.getAttribute('data-theme') === 'light') {
-            doc.removeAttribute('data-theme');
-        } else {
-            doc.setAttribute('data-theme', 'light');
-        }
-    }
-
-    // Dynamic Skill Bars Loader
-    document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-            document.querySelectorAll('.progress-fill').forEach(bar => {
-                bar.style.width = bar.getAttribute('data-width');
-            });
-        }, 200);
-    });
-
-    // Re-animate skills on tap
-    function animateBar(element, targetWidth) {
-        const bar = element.querySelector('.progress-fill');
-        bar.style.width = '0';
-        setTimeout(() => { bar.style.width = targetWidth; }, 100);
-    }
-
-    // Filter Navigation Mechanism
-    function filterTimeline(category, button) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        document.querySelectorAll('.timeline-item').forEach(item => {
-            if (category === 'all' || item.getAttribute('data-cat') === category) {
-                item.style.display = 'block';
+    <!-- Scripts -->
+    <script>
+        // 1. Theme Toggle
+        function toggleTheme() {
+            const doc = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (doc.getAttribute('data-theme') === 'light') {
+                doc.removeAttribute('data-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
             } else {
-                item.style.display = 'none';
+                doc.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
             }
-        });
-    }
-</script>
+        }
+
+        // 2. Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // 3. Typewriter Effect
+        const words = ["Web Developer", "Python Enthusiast", "Sales Specialist", "AI Integrator"];
+        let i = 0;
+        let timer;
+        
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typewriter').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typewriter').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) { i++; } else { i = 0; }
+                    typingEffect();
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+        
+        // Start Typwriter
+        typingEffect();
+
+        // 4. Scroll Reveal & Skill Bar Animation via Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const skillBars = document.querySelectorAll('.skill-progress');
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // If the revealed element contains skill bars, animate them
+                    const barsInElement = entry.target.querySelectorAll('.skill-progress');
+                    barsInElement.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                    
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
