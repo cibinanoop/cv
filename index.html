@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cibin Anoop | Interactive Professional CV</title>
+    <style>
+        :root {
+            --bg-primary: #0a0f1d;
+            --bg-secondary: #141b2d;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --badge-bg: rgba(59, 130, 246, 0.15);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+            --card-border: rgba(0, 0, 0, 0.05);
+            --badge-bg: rgba(37, 99, 235, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .theme-toggle {
+            background: var(--accent-gradient);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .summary {
+            max-width: 800px;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Grid Layout */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 902px) {
+            .cv-grid {
+                grid-template-columns: 1fr 1.8fr;
+            }
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Interactive Skills Section */
+        .skill-item {
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background-color: rgba(156, 163, 175, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--accent-gradient);
+            height: 100%;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+        }
+
+        /* Filter Tabs */
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--text-main);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Interactive Timeline */
+        .timeline-item {
+            border-left: 2px solid var(--accent);
+            padding-left: 1.8rem;
+            position: relative;
+            margin-bottom: 2.5rem;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+        }
+
+        .time-tag {
+            font-size: 0.8rem;
+            background: var(--badge-bg);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .company-tag {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-box {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+        }
+
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .contact-link {
+            display: block;
+            color: var(--text-main);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">⚡ CA.DEVELOPER</div>
+        <button class="theme-toggle" onclick="toggleTheme()">Toggle Mode</button>
+    </header>
+
+    <section class="hero">
+        <h1>Cibin Anoop</h1>
+        <p class="subtitle">B.Com Graduate | Web Developer | Python & AI Integration Expert</p>
+        <p class="summary">
+            Motivated and detail-oriented professional specializing in computer applications, digital tools, and leadership. Proven track record in achieving sales targets with 200+ products sold and 800+ inquiries generated during dynamic promotional campaigns.
+        </p>
+    </section>
+
+    <div class="cv-grid">
+        <!-- LEFT COLUMN: Contact, Tech Skills, Stats -->
+        <div class="left-col">
+            <div class="card">
+                <h2>Contact & Info</h2>
+                <a href="mailto:cibinanoop242004@gmail.com" class="contact-link">📧 cibinanoop242004@gmail.com</a>
+                <a href="tel:+919746868705" class="contact-link">📞 +91 9746868705</a>
+                <a href="https://linkedin.com/in/cibin-anoop-36367a365" target="_blank" class="contact-link">🔗 LinkedIn Profile</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">📍 Kottayam, Kerala, India<br>🌐 Languages: English, Malayalam, Hindi</p>
+            </div>
+
+            <div class="card">
+                <h2>Technical Metrics</h2>
+                
+                <div class="skill-item" onclick="animateBar(this, '90%')">
+                    <div class="skill-name"><span>Microsoft Office Suite</span><span>95%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '85%')">
+                    <div class="skill-name"><span>Web Development (HTML/CSS)</span><span>85%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '80%')">
+                    <div class="skill-name"><span>Python & Automation</span><span>80%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '85%')">
+                    <div class="skill-name"><span>Adobe Creative Suite</span><span>85%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '90%')">
+                    <div class="skill-name"><span>AI Workflow Integration</span><span>90%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+                </div>
+                <small style="color: var(--text-muted); display:block; margin-top:1rem;">💡 Click any bar to re-animate live.</small>
+            </div>
+
+            <div class="card">
+                <h2>Impact Metrics</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-num">800+</div>
+                        <div class="stat-label">Inquiries Generated</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">200+</div>
+                        <div class="stat-label">Products Sold</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">300+</div>
+                        <div class="stat-label">NSS Members Led</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">100%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Interactive Experience, Projects, Education -->
+        <div class="right-col">
+            <div class="card">
+                <h2>Professional Journey</h2>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterTimeline('all', this)">Show All</button>
+                    <button class="filter-btn" onclick="filterTimeline('exp', this)">Experience</button>
+                    <button class="filter-btn" onclick="filterTimeline('proj', this)">Projects & Leadership</button>
+                    <button class="filter-btn" onclick="filterTimeline('edu', this)">Education</button>
+                </div>
+
+                <div id="timeline">
+                    <!-- Experience -->
+                    <div class="timeline-item" data-cat="exp">
+                        <span class="time-tag">April 2024</span>
+                        <h3 style="margin-top: 0.5rem;">Sales Promotion Executive</h3>
+                        <p class="company-tag">TMK System — Kottayam, Kerala</p>
+                        <ul>
+                            <li>Generated 800+ qualified inquiries through strategic customer engagement.</li>
+                            <li>Achieved sales of 200+ products within a lightning fast 12-day promotional period.</li>
+                            <li>Provided meticulous after-sales support to secure perfect client feedback loops.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Leadership -->
+                    <div class="timeline-item" data-cat="proj">
+                        <span class="time-tag">Leadership Position</span>
+                        <h3 style="margin-top: 0.5rem;">NSS Secretary</h3>
+                        <p class="company-tag">National Service Scheme</p>
+                        <ul>
+                            <li>Coordinated a massive network of 300+ members in critical social service initiatives.</li>
+                            <li>Organized large-scale outreach events focusing on civic duties and financial literacy.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Project -->
+                    <div class="timeline-item" data-cat="proj">
+                        <span class="time-tag">Academic Project</span>
+                        <h3 style="margin-top: 0.5rem;">Stock Market Awareness Initiative</h3>
+                        <p class="company-tag">Financial Literacy Campaign</p>
+                        <ul>
+                            <li>Educated fellow commerce tracks regarding investment strategies and stock fundamentals.</li>
+                            <li>Designed advanced graphic educational material detailing asset dynamic charts.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="timeline-item" data-cat="edu">
+                        <span class="time-tag">Graduated 2025</span>
+                        <h3 style="margin-top: 0.5rem;">Bachelor of Commerce (B.Com)</h3>
+                        <p class="company-tag">Mahatma Gandhi University — Specialization in Computer Applications</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Core studies combined corporate accounting with modern software architecture frameworks including Python, Tally ERP 9, and responsive frontends.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Verified Certifications</h2>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Tally ERP 9 (2025)</span>
+                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Microsoft Office Specialist (2024)</span>
+                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Adobe Photoshop (2022)</span>
+                    <span class="time-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Adobe Illustrator (2022)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Theme Toggle Script
+    function toggleTheme() {
+        const doc = document.documentElement;
+        if (doc.getAttribute('data-theme') === 'light') {
+            doc.removeAttribute('data-theme');
+        } else {
+            doc.setAttribute('data-theme', 'light');
+        }
+    }
+
+    // Dynamic Skill Bars Loader
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }, 200);
+    });
+
+    // Re-animate skills on tap
+    function animateBar(element, targetWidth) {
+        const bar = element.querySelector('.progress-fill');
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = targetWidth; }, 100);
+    }
+
+    // Filter Navigation Mechanism
+    function filterTimeline(category, button) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            if (category === 'all' || item.getAttribute('data-cat') === category) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>
