@@ -6,34 +6,656 @@
     <title>Cibin Anoop | Interactive Professional CV</title>
     <style>
         :root {
-            --bg-primary: #0a0f1d;
-            --bg-secondary: #141b2d;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            /* Dark Theme Variables */
+            --bg-color-1: #0f172a;
+            --bg-color-2: #1e1b4b;
+            --bg-color-3: #0f2e2e;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
             --accent: #3b82f6;
-            --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            --card-border: rgba(255, 255, 255, 0.05);
+            --accent-gradient: linear-gradient(135deg, #3b82f6, #a855f7);
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.08);
             --badge-bg: rgba(59, 130, 246, 0.15);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="light"] {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
+            /* Light Theme Variables */
+            --bg-color-1: #f1f5f9;
+            --bg-color-2: #e0e7ff;
+            --bg-color-3: #ccfbf1;
             --text-main: #0f172a;
-            --text-muted: #64748b;
+            --text-muted: #475569;
             --accent: #2563eb;
-            --accent-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
-            --card-border: rgba(0, 0, 0, 0.05);
+            --accent-gradient: linear-gradient(135deg, #2563eb, #9333ea);
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --card-border: rgba(255, 255, 255, 0.6);
             --badge-bg: rgba(37, 99, 235, 0.1);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s;
         }
 
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            /* Animated Background */
+            background: linear-gradient(-45deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .theme-toggle {
+            background: var(--accent-gradient);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        /* Hero Section with Image */
+        .hero {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-in-out;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-between;
+            }
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background-image: linear-gradient(var(--bg-color-1), var(--bg-color-1)), var(--accent-gradient);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .summary {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* Grid Layout */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 902px) {
+            .cv-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.8rem;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Interactive Skills Section */
+        .skill-item {
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background-color: rgba(156, 163, 175, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--accent-gradient);
+            height: 100%;
+            width: 0;
+            border-radius: 4px;
+            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Filter Tabs */
+        .filter-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--accent);
+            color: var(--text-main);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Interactive Timeline */
+        .timeline-item {
+            border-left: 2px solid var(--accent);
+            padding-left: 1.8rem;
+            position: relative;
+            margin-bottom: 2.5rem;
+            animation: slideIn 0.5s ease-out forwards;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(5px);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-color-1);
+            border: 2px solid var(--accent);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-item:hover::after {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .time-tag {
+            font-size: 0.85rem;
+            background: var(--badge-bg);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-tag {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.6rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        ul li:hover {
+            color: var(--text-main);
+        }
+
+        ul li::before {
+            content: "▹";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.2rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-num {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-weight: 500;
+        }
+
+        /* Links */
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">CA.DEV</div>
+        <button class="theme-toggle" onclick="toggleTheme()">Toggle Vision</button>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Cibin Anoop</h1>
+            <p class="subtitle">Web Developer | Python & AI Integration Expert</p>
+            <p class="summary">
+                Detail-oriented professional specializing in computer applications and digital tools. Proven track record in achieving targets with 200+ products sold and 800+ inquiries generated during dynamic promotional campaigns.
+            </p>
+        </div>
+        <div class="profile-img-container">
+            <!-- REPLACE THE SRC BELOW WITH YOUR IMAGE LINK OR FILE NAME -->
+            <img src="YOUR_IMAGE_URL_HERE.jpg" alt="Cibin Anoop" class="profile-img">
+        </div>
+    </section>
+
+    <div class="cv-grid">
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+            <div class="card">
+                <h2>Contact Area</h2>
+                <a href="mailto:cibinanoop242004@gmail.com" class="contact-link">📧 cibinanoop242004@gmail.com</a>
+                <a href="tel:+919746868705" class="contact-link">📞 +91 9746868705</a>
+                <a href="https://linkedin.com/in/cibin-anoop-36367a365" target="_blank" class="contact-link">🔗 LinkedIn Profile</a>
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border);">
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;">📍 Kottayam, Kerala, India</p>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">🌐 EN • ML • HI</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Tech Matrix</h2>
+                
+                <div class="skill-item" onclick="animateBar(this, '95%')">
+                    <div class="skill-name"><span>MS Office Suite</span><span>95%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '85%')">
+                    <div class="skill-name"><span>Web Dev (HTML/CSS)</span><span>85%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '80%')">
+                    <div class="skill-name"><span>Python Automation</span><span>80%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '85%')">
+                    <div class="skill-name"><span>Adobe Creative</span><span>85%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-item" onclick="animateBar(this, '90%')">
+                    <div class="skill-name"><span>AI Integration</span><span>90%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+                </div>
+                <p style="color: var(--accent); font-size: 0.8rem; margin-top:1rem; text-align: center;">Click any bar to trigger animation</p>
+            </div>
+
+            <div class="card">
+                <h2>Impact Scale</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-num">800+</div>
+                        <div class="stat-label">Inquiries</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">200+</div>
+                        <div class="stat-label">Sales</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">300+</div>
+                        <div class="stat-label">Team Size</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">100%</div>
+                        <div class="stat-label">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+            <div class="card">
+                <h2>Career Timeline</h2>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterTimeline('all', this)">All History</button>
+                    <button class="filter-btn" onclick="filterTimeline('exp', this)">Experience</button>
+                    <button class="filter-btn" onclick="filterTimeline('proj', this)">Projects & Leadership</button>
+                    <button class="filter-btn" onclick="filterTimeline('edu', this)">Education</button>
+                </div>
+
+                <div id="timeline">
+                    <!-- Experience -->
+                    <div class="timeline-item" data-cat="exp">
+                        <span class="time-tag">April 2024</span>
+                        <h3 style="margin-top: 0.5rem;">Sales Promotion Executive</h3>
+                        <p class="company-tag">TMK System — Kottayam, Kerala</p>
+                        <ul>
+                            <li>Generated 800+ qualified inquiries through targeted engagement.</li>
+                            <li>Achieved 200+ product sales within a 12-day sprint.</li>
+                            <li>Executed flawless after-sales support ensuring high brand retention.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Leadership -->
+                    <div class="timeline-item" data-cat="proj">
+                        <span class="time-tag">Leadership Role</span>
+                        <h3 style="margin-top: 0.5rem;">NSS Secretary</h3>
+                        <p class="company-tag">National Service Scheme</p>
+                        <ul>
+                            <li>Spearheaded operations for a 300+ member volunteer network.</li>
+                            <li>Orchestrated community outreach driving civic responsibility.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Project -->
+                    <div class="timeline-item" data-cat="proj">
+                        <span class="time-tag">Academic Initiative</span>
+                        <h3 style="margin-top: 0.5rem;">Stock Market Awareness Program</h3>
+                        <p class="company-tag">Financial Literacy</p>
+                        <ul>
+                            <li>Designed comprehensive curriculum on investment fundamentals.</li>
+                            <li>Created digital presentations to visualize complex market dynamics.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="timeline-item" data-cat="edu">
+                        <span class="time-tag">Class of 2025</span>
+                        <h3 style="margin-top: 0.5rem;">Bachelor of Commerce (B.Com)</h3>
+                        <p class="company-tag">Mahatma Gandhi University — Computer Applications</p>
+                        <ul>
+                            <li>Integrated corporate commerce with technical proficiencies (Python, Web Dev).</li>
+                            <li>Mastered accounting software architecture including Tally ERP 9.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Verified Credentials</h2>
+                <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                    <span class="time-tag">Tally ERP 9 (2025)</span>
+                    <span class="time-tag">Microsoft Office Specialist (2024)</span>
+                    <span class="time-tag">Adobe Photoshop (2022)</span>
+                    <span class="time-tag">Adobe Illustrator (2022)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Glassmorphism Theme Toggle
+    function toggleTheme() {
+        const doc = document.documentElement;
+        if (doc.getAttribute('data-theme') === 'light') {
+            doc.removeAttribute('data-theme');
+        } else {
+            doc.setAttribute('data-theme', 'light');
+        }
+    }
+
+    // Dynamic Skill Bars Loader with Staggered Animation
+    document.addEventListener("DOMContentLoaded", () => {
+        const bars = document.querySelectorAll('.progress-fill');
+        bars.forEach((bar, index) => {
+            setTimeout(() => {
+                bar.style.width = bar.getAttribute('data-width');
+            }, 300 + (index * 150)); // Staggered loading effect
+        });
+    });
+
+    // Re-animate skills on tap/click
+    function animateBar(element, targetWidth) {
+        const bar = element.querySelector('.progress-fill');
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = targetWidth; }, 50);
+    }
+
+    // Smooth Filter Navigation
+    function filterTimeline(category, button) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const items = document.querySelectorAll('.timeline-item');
+        
+        items.forEach(item => {
+            // Add a quick fade out effect
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                if (category === 'all' || item.getAttribute('data-cat') === category) {
+                    item.style.display = 'block';
+                    // Trigger reflow
+                    void item.offsetWidth;
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                } else {
+                    item.style.display = 'none';
+                }
+            }, 300); // Matches the CSS transition time
+        });
+    }
+</script>
+</body>
+</html>
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-primary);
